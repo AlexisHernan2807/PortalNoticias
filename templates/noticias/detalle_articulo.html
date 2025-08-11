@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+
+{% block contenido_cuerpo %}
+
+     <div class="contenedor-articulo-detalle">
+
+          <h1>{{ articulo.titulo }}</h1>
+
+          <img src="{{ articulo.imagen.url }}" class="imagen" alt="{{ articulo.titulo }}">
+          <p class="articulo-parrafo">{{ articulo.contenido }}</p>
+     </div>
+     
+     
+	<div>
+		{% if articulo.misComentarios %}
+			<br><br>
+			<h1 class="titulo-Principal">Comentarios</h1>
+		{% endif %}
+		
+        {% for c in articulo.misComentarios %}
+			<p>{{c.texto}} / {{c.usuario}}
+			{% if c.usuario == user or user.is_staff %}
+			   <a href="{% url 'comentarios:path_modificar_comentario' c.pk %} ">Modificar</a>
+			   <a href="{% url 'comentarios:path_eliminar_comentario' c.pk %} ">Eliminar</a>
+			{% endif %}
+			</p>
+		{% endfor %}
+      <div class="login-container">
+		  {% if user.is_authenticated %}
+		   <form method="POST" action = "{% url 'comentarios:path_comentar' articulo.pk %}">{% csrf_token %}
+		   <textarea type="text" name="comentario" rows="5" cols ="47"> </textarea><br> <br>
+		   <button type="submit" class="btn-confirmar">COMENTAR</button>
+		   </form>
+		 {% endif %}
+	</div>	
+	</div>
+ {% endblock contenido_cuerpo %}
+
+ 

@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+
+{% block contenido_cuerpo %}
+    <h1 class="titulo-Principal">Noticias Wichi</h1>
+    <br> 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div>Ordenar:
+        <a href="{% url 'noticias:filtro_wichi' %}?orden=dsc" class="btn-borrar"style="margin-right: 15px;">Recientes</a>
+        <a href="{% url 'noticias:filtro_wichi' %}?orden=asc" class="btn-modificar">Antiguas</a>
+    </div>
+<div class="contenedor-articulos">
+    {% for articulo in articulos %}
+        <div class="articulo">
+            <h2 class="titulo">{{ articulo.titulo }}</h2>
+            <a href="{% url 'noticias:path_detalle_articulo' articulo.pk %}">
+                <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="300" height="300">
+            </a>
+            <div class="opciones">
+{% if user.is_staff %}
+                    <a href="{% url 'noticias:path_modificar_articulo' articulo.pk %}" class="btn-modificar">Modificar</a>
+                    <a href="{% url 'noticias:path_borrar_articulo' articulo.pk %}" class="btn-borrar">Borrar</a>
+                {% endif %}  
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock contenido_cuerpo %}

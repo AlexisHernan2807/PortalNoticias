@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block contenido_cuerpo %}
+	<p>
+		<h1  class="titulo-Principal">
+			                    MODIFICAR COMENTARIO
+		</h1>
+		<div class = "login-container">
+			<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+				{{form.as_p}}
+		    	<button type="submit" class="btn-confirmar">MODIFICAR</button>
+
+			</form>
+		</div>
+	</p>
+{% endblock contenido_cuerpo %}

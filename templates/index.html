@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Portal de noticias</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="{% static 'font/font-awesome.min.css'%}" />
+<link rel="stylesheet" type="text/css" href="{% static 'font/font.css'%}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}" media="screen" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}" media="screen" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css'%}" media="screen" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.bxslider.css'%}" media="screen" />
+</head>
+<body>
+<div class="body_wrapper">
+  <div class="center">
+    <div class="header_area">
+      <div class="logo floatleft">
+        <a href="#"><img src="{% static 'img/logo.png' %}" alt="alexis" /></a>
+      </div>
+      <div class="social_plus_search floatright">
+        <div class="social">
+          <ul>
+              {% if user.is_authenticated %}
+               <li>
+                <span>Hola {{user.username}}</span>
+               </li>
+              <li>
+                <form method="POST" action="{% url 'usuarios:path_logout' %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn-cerrar-sesion">Cerrar Sesión</button>
+                 </form>
+              </li>
+              {% else %}
+               <li>
+                  <a href="{% url 'usuarios:path_login'%}">Login</a>
+               </li>
+               <li>
+                  <a href="{% url 'usuarios:path_registro'%}">Registro</a>
+               </li>
+              {% endif %}
+          </ul>
+        </div>
+        <div class="search">
+          <form action="{% url 'noticias:buscar' %}" method="get" id="search_form" autocomplete="off">
+             <input type="text" name="q" id="s" />
+            <input type="submit" id="searchform" value="search" />
+             <input type="hidden" value="post" name="post_type" />
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="main_menu_area">
+      <ul id="nav">
+        <li><a href="{% url 'noticias:inicio' %}">Inicio</a>
+
+        <li><a href="{% url 'noticias:filtro_qom'%}">Qmo</a>
+          
+        <li><a href="{% url 'noticias:filtro_wichi'%}">Wichi</a></li>
+        <li><a href="{% url 'noticias:filtro_mocovi'%}">Mocovi</a>
+          
+        <li><a href="{% url 'noticias:acerca_de'%}">Acerca de</a></li>
+        <li><a href="{%url 'noticias:contacto'%}">Contacto</a></li>
+        
+        </li>  
+        
+        {% if user.is_staff %}
+            <li><a href="{% url 'noticias:path_crear_articulo' %}">Cargar Articulo</a></li>
+        {%endif%}   
+        
+      </ul>
+    </div>
+    <div class="slider_area">
+      <div class="slider">
+        <ul class="bxslider">
+          <li><img src="{%static 'img/pueblo-qom-originario.jpg'%}" alt="" title="Slider caption text" /></li>
+      </div>
+     </div>
+    <br>
+    <br>
+
+  
+<div class = "cuerpo">
+    <p>
+       {% block contenido_cuerpo %}
+       
+       
+       {% endblock contenido_cuerpo %}
+    </p>
+     
+</div>
+
+<div class="copyright_text">
+        <p>Copyright &copy; 2045 The News Reporter Inc. All rights reserved | Design by <a target="_blank" rel="nofollow" 
+          href="http://www.graphicsfuel.com/2045/10/wp-magazine-theme-template-psd/">Rafi MD</a></p>
+        <p>Trade marks and images used in the design are the copyright of their respective owners and are used for demo purposes only.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="{%static  'js/jquery-min.js'%}"></script> 
+<script type="text/javascript" src="{%static  'js/bootstrap.min.js'%}"></script> 
+<script type="text/javascript" src="{%static  'js/jquery.bxslider.js'%}"></script> 
+<script type="text/javascript" src="{%static  'js/selectnav.min.js'%}"></script> 
+<script type="text/javascript">
+selectnav('nav', {
+    label: '-Navigation-',
+    nested: true,
+    indent: '-'
+});
+selectnav('f_menu', {
+    label: '-Navigation-',
+    nested: true,
+    indent: '-'
+});
+$('.bxslider').bxSlider({
+    mode: 'fade',
+    captions: true
+});
+</script>
+</body>
+</html>

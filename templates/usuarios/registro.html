@@ -1,0 +1,83 @@
+{% extends 'index.html' %}
+
+{% block contenido_cuerpo %}
+<br><br>
+<h4 style="text-align: center;" class="titulo-Principal">Registro de Usuario</h4>
+<div class="login-container">
+    <div class="item">
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="error-message">
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+            <div>
+                <br><br>
+                {{ form.username.label_tag }}
+                {{ form.username }}
+                {% if form.username.errors %}
+                <div class="error-message">
+                    {{ form.username.errors }}
+                </div>
+                {% endif %}
+            </div>
+            <div>
+                <br><br>
+                {{ form.first_name.label_tag }}
+                {{ form.first_name }}
+                {% if form.first_name.errors %}
+                <div class="error-message">
+                    {{ form.first_name.errors }}
+                </div>
+                {% endif %}
+            </div>
+            <div>
+                <br><br>
+                {{ form.last_name.label_tag }}
+                {{ form.last_name }}
+                {% if form.last_name.errors %}
+                <div class="error-message">
+                    {{ form.last_name.errors }}
+                </div>
+                {% endif %}
+            </div>
+            <div>
+                <br><br>
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {% if form.email.errors %}
+                <div class="error-message">
+                    {{ form.email.errors }}
+                </div>
+                {% endif %}
+            </div>
+            <div>
+                <br><br>
+                {{ form.password1.label_tag }}
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                <div class="error-message">
+                    {{ form.password1.errors }}
+                </div>
+                {% endif %}
+            </div>
+            <div>
+                <br><br>
+                {{ form.password2.label_tag }}
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                <div class="error-message">
+                    {{ form.password2.errors }}
+                </div>
+                {% endif %}
+            </div>
+            <br><br><br><br>
+            <button type="submit" class="btn-white">Registrar</button>
+        </form>
+    </div>
+    <br><br><br><br><br><br><br>
+</div>
+
+{% endblock contenido_cuerpo%}

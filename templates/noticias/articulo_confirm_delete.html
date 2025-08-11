@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% block contenido_cuerpo %}
+<p>
+        <div class="login-container">
+			<form method="post">{% csrf_token %}
+                <p>Estas seguro que desea eliminar: "{{ object }}"?</p>
+                {{ form }}
+                <input type="submit" class="btn-confirmar" value="CONFIRMAR">
+                <a href="{% url 'noticias:path_listar_noticias' %}" class="btn-cancelar">CANCELAR</a>
+            </form>
+		</div>
+</p>	
+ 
+
+
+{% endblock contenido_cuerpo %}

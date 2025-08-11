@@ -1,0 +1,22 @@
+{% extends 'index.html'%}
+
+{% block contenido_cuerpo %}
+<br><br>
+<h4 style="text-align: center;" class="titulo-Principal">Login</h4>
+
+<div class="login-container">
+  <div class="item">
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.errors }}
+      <input type="text" name="username" placeholder="Usuario" required>
+      <br><br>
+      <input type="password" name="password" placeholder="Contraseña" required>
+      <br><br>
+      <button type="submit" class="btn-white">Aceptar</button>
+    </form>
+  </div>
+  <br><br><br><br><br><br><br>
+</div>
+
+{% endblock contenido_cuerpo %}

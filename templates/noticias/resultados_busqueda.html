@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block contenido_cuerpo %}
+	<p>
+		<h1>
+			Resultado de búsqueda
+		</h1>
+	</p>
+
+    {% if resultados %}
+        <ul>
+            {% for articulo in resultados %}
+                <li>
+                    <h2>{{ articulo.titulo }}</h2>
+                    <p>{{ articulo.contenido|truncatewords:50 }}</p>
+                    <a href="{% url 'noticias:path_detalle_articulo' articulo.id %}">Leer más</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+          <p>No se encontraron resultados para su búsqueda.</p>
+    {% endif %}
+{% endblock contenido_cuerpo %}

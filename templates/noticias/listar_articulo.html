@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block contenido_cuerpo %}
+    <h1 class="titulo-Principal">Portal de Noticias</h1>
+    <div>
+        Ordenar
+        <a href="{%url 'noticias:path_listar_noticias'%}?orden=dsc"class="btn-borrar">Reciente</a>
+        <a href="{%url 'noticias:path_listar_noticias'%}?orden=asc"class= "btn-modificar">Antiguas</a>
+    </div>
+    
+    <div class="contenedor-articulos">
+        {% for p in articulo %}
+            <div class="articulo">
+                <h2 class="titulo">{{p.titulo}}</h2>
+                <a href="{% url 'noticias:path_detalle_articulo' p.pk %}">
+                    <img src="{{p.imagen.url}}" alt="{{p.titulo}}">
+                </a>
+                <div class="opciones">
+                    {% if user.is_staff %}
+                    <a href="{% url 'noticias:path_modificar_articulo' p.pk %}"class="btn-modificar">Modificar</a>
+                    <a href="{% url 'noticias:path_borrar_articulo' p.pk %} " class="btn-borrar">Borrar</a>
+                       
+                    
+                   {% endif %}   
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock contenido_cuerpo %}

@@ -1,0 +1,17 @@
+	{% extends 'index.html' %}
+
+	{% block contenido_cuerpo %}
+		<p>
+			<h1 class="titulo-Principal">
+				Articulo Nuevo
+			</h1>
+			<div class="login-container">
+				<!-- {% csrf_token %} si o si va cuando uso el metodo post --> 
+				<form method="POST" autocomplete="off" enctype="multipart/form-data"> {% csrf_token %}
+					{{form.as_p}}
+					<button type="submit" class="btn-confirmar">CREAR</button>
+
+				</form>
+			</div>
+		</p>
+	{% endblock contenido_cuerpo %}
