@@ -5,7 +5,8 @@
      <div class="contenedor-articulo-detalle">
 
           <h1>{{ articulo.titulo }}</h1>
-
+          <br>
+		  <h4>{{ articulo.fecha_publicacion|date:"d/m/Y" }}</h4>
           <img src="{{ articulo.imagen.url }}" class="imagen" alt="{{ articulo.titulo }}">
           <p class="articulo-parrafo">{{ articulo.contenido }}</p>
      </div>
